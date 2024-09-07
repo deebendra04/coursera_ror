@@ -1,0 +1,8 @@
+class CourseContent < ApplicationRecord
+  belongs_to :course
+  has_many :progresses
+  has_many :reviews, dependent: :destroy
+
+  validates :title, presence: true
+  validates :description, presence: true
+end

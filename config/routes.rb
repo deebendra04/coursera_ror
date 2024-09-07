@@ -6,4 +6,15 @@ Rails.application.routes.draw do
 
   # Route for user login
   post '/login', to: 'sessions#create'
+
+  resources :courses, only: [:index, :show, :create, :update, :destroy] do
+    resources :course_contents, only: [:index, :create] do
+      resources :reviews, only: [:index, :create]
+    end
+  end
+
+  resources :course_contents, only: [:show, :update, :destroy]
+  resources :enrollments, only: [:index, :show, :create, :update, :destroy]
+  resources :progresses, only: [:create, :update]
+  resources :reviews, only: [:show, :update, :destroy]
 end
