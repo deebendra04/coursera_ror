@@ -7,7 +7,8 @@ class CoursesController < ApplicationController
   # GET /courses
   def index
     courses = Course.all
-    render json: courses
+    paginated_courses = Pagination::PaginationHelper.paginate(courses, page: params[:page], per_page: params[:per_page] || 10)
+    render json: paginated_courses
   end
   
   # GET /courses/:id
